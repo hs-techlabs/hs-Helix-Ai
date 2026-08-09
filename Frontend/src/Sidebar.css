@@ -1,11 +1,12 @@
 .sidebar {
-    background-color: #171717;
-    color: #b4b4b4;
+    background-color: var(--bg-secondary);
+    color: var(--text-secondary);
     height: 100vh;
     width: 320px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    transition: background-color 0.3s ease;
 }
 
 
@@ -17,14 +18,14 @@ button {
     padding: 10px;
     border-radius: 5px;
     background-color: transparent;
-    border: solid 0.5px rgba(255, 255, 255, 0.5);
+    border: solid 0.5px var(--border-primary);
     cursor: pointer;
 }
 
 .logo {
     height: 25px;
     width: 25px;
-    background-color: #fff;
+    background-color: var(--text-primary);
     border-radius: 50%;
     object-fit: cover;
 }
@@ -34,13 +35,14 @@ button span {
 }
 
 button:hover {
-    background-color: rgba(180, 180, 180, 0.1);
+    background-color: var(--bg-hover);
 }
 
 .history {
     margin: 10px;
     padding: 10px;
     height: 100%;
+    overflow-y: auto;
 }
 
 .history li {
@@ -51,19 +53,60 @@ button:hover {
     font-size: 14px;
     border: solid 10px transparent;
     position: relative;
+    color: var(--text-secondary);
 }
 
 .history li:hover {
-    background-color: rgba(180, 180, 180, 0.1);
+    background-color: var(--bg-hover);
     border-radius: 10px;
 }
 
+.sidebar-bottom {
+    padding: 0 10px 0 10px;
+    margin: 0 10px;
+    border-top: solid 0.25px var(--border-primary);
+}
+
+.theme-toggle-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    width: 100%;
+    padding: 0.6rem 0.75rem;
+    margin: 0.5rem 0 0.3rem;
+    border: none;
+    border-radius: 8px;
+    background-color: transparent;
+    color: var(--text-secondary);
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: background-color 0.2s;
+}
+
+.theme-toggle-btn:hover {
+    background-color: var(--bg-hover);
+}
+
+.theme-toggle-btn i {
+    font-size: 1rem;
+    width: 20px;
+    text-align: center;
+    color: var(--text-secondary);
+}
+
+.theme-toggle-btn span {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
 .sign {
-    padding: 10px;
-    margin: 10px;
+    padding: 6px 10px 10px;
     font-size: 14px;
     text-align: center;
-    border-top: solid 0.25px rgba(255, 255, 255, 0.5);
+}
+
+.sign p {
+    color: var(--text-tertiary);
 }
 
 .fa-trash {
@@ -74,14 +117,14 @@ button:hover {
 
 .history li:hover .fa-trash {
     opacity: 1;
-    color: #fff;
+    color: var(--text-primary);
 }
 
 .fa-trash:hover {
-    color: #f87171 !important;
+    color: var(--danger-hover) !important;
 }
 
 .highlighted {
-    background-color: rgba(180, 180, 180, 0.05);
+    background-color: var(--bg-highlight);
     border-radius: 10px;
 }

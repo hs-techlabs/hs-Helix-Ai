@@ -1,16 +1,20 @@
 import "./Sidebar.css";
 import { useContext, useEffect } from "react";
 import { MyContext } from "./MyContext.jsx";
+import { useAuth } from "./context/AuthContext.jsx";
+import { useTheme } from "./context/ThemeContext.jsx";
 import {v1 as uuidv1} from "uuid";
 import blackLogo from "./assets/blacklogo.png";
 
 function Sidebar() {
     const {allThreads, setAllThreads, currThreadId, setNewChat, setPrompt, setReply, setCurrThreadId, setPrevChats} = useContext(MyContext);
+    const { authFetch } = useAuth();
+    const { theme, toggleTheme } = useTheme();
     const API_BASE = import.meta.env.VITE_API_BASE_URL || "http://127.0.0.1:8080";
 
     const getAllThreads = async () => {
         try {
-            const response = await fetch(`${API_BASE}/api/thread`);
+            const response = await authFetch(`${API_BASE}/api/thread`);
             const res = await response.json();
             if (Array.isArray(res)) {
                 const filteredData = res.map(thread => ({threadId: thread.threadId, title: thread.title}));
@@ -40,7 +44,7 @@ function Sidebar() {
         setCurrThreadId(newThreadId);
 
         try {
-            const response = await fetch(`${API_BASE}/api/thread/${newThreadId}`);
+            const response = await authFetch(`${API_BASE}/api/thread/${newThreadId}`);
             const res = await response.json();
             console.log(res);
             setPrevChats(res);
@@ -53,7 +57,7 @@ function Sidebar() {
 
     const deleteThread = async (threadId) => {
         try {
-            const response = await fetch(`${API_BASE}/api/thread/${threadId}`, {method: "DELETE"});
+            const response = await authFetch(`${API_BASE}/api/thread/${threadId}`, {method: "DELETE"});
             const res = await response.json();
             console.log(res);
 
@@ -97,8 +101,14 @@ function Sidebar() {
                 }
             </ul>
  
-            <div className="sign">
-                <p>By hs-techlab <i className="fa-brands fa-github-alt"></i> </p>
+            <div className="sidebar-bottom">
+                <div className="theme-toggle-btn" onClick={toggleTheme}>
+                    <i className={`fa-solid ${theme === "dark" ? "fa-sun" : "fa-moon"}`}></i>
+                    <span>{theme === "dark" ? "Light mode" : "Dark mode"}</span>
+                </div>
+                <div className="sign">
+                    <p>By hs-techlab <i className="fa-brands fa-github-alt"></i> </p>
+                </div>
             </div>
         </section>
     )

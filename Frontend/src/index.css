@@ -1,0 +1,134 @@
+/* ═══════════════════════════════════════════════
+   HELIX AI — Theme Variables
+   ═══════════════════════════════════════════════ */
+
+/* ── Dark Theme (default) ── */
+[data-theme="dark"] {
+    /* Backgrounds */
+    --bg-primary: #212121;
+    --bg-secondary: #171717;
+    --bg-tertiary: #323232;
+    --bg-elevated: #323232;
+    --bg-input: rgba(255, 255, 255, 0.05);
+    --bg-input-solid: #262626;
+    --bg-hover: rgba(180, 180, 180, 0.1);
+    --bg-highlight: rgba(180, 180, 180, 0.05);
+
+    /* Text */
+    --text-primary: #ececec;
+    --text-secondary: #b4b4b4;
+    --text-tertiary: #888;
+    --text-placeholder: #555;
+    --text-heading: #f1f1f1;
+
+    /* Borders */
+    --border-primary: rgba(255, 255, 255, 0.5);
+    --border-subtle: rgba(255, 255, 255, 0.08);
+    --border-input: #333;
+
+    /* Accent (indigo — same for both themes) */
+    --accent: #6366f1;
+    --accent-hover: #4f46e5;
+    --accent-light: #818cf8;
+    --accent-lighter: #a5b4fc;
+    --accent-bg: rgba(99, 102, 241, 0.15);
+
+    /* Shadows */
+    --shadow-input: rgba(0, 0, 0, 0.05);
+    --shadow-dropdown: rgba(0, 0, 0, 0.3);
+
+    /* Status */
+    --error-bg: rgba(239, 68, 68, 0.1);
+    --error-border: rgba(239, 68, 68, 0.3);
+    --error-text: #fca5a5;
+    --error-icon: #ef4444;
+    --danger-hover: #f87171;
+
+    /* Auth page */
+    --auth-page-bg: linear-gradient(135deg, #0f0f0f 0%, #1a1a2e 50%, #16213e 100%);
+    --auth-form-bg: #1a1a1a;
+    --auth-subtitle: #888;
+
+    /* Code blocks */
+    --code-bg: #2d2d2d;
+
+    /* Scrollbar */
+    --scrollbar-thumb: rgba(255, 255, 255, 0.15);
+    --scrollbar-track: transparent;
+}
+
+/* ── Light Theme ── */
+[data-theme="light"] {
+    /* Backgrounds */
+    --bg-primary: #f7f7f8;
+    --bg-secondary: #ffffff;
+    --bg-tertiary: #e8e8ed;
+    --bg-elevated: #ffffff;
+    --bg-input: rgba(0, 0, 0, 0.04);
+    --bg-input-solid: #f0f0f3;
+    --bg-hover: rgba(0, 0, 0, 0.05);
+    --bg-highlight: rgba(0, 0, 0, 0.03);
+
+    /* Text */
+    --text-primary: #1a1a1a;
+    --text-secondary: #666666;
+    --text-tertiary: #999999;
+    --text-placeholder: #aaaaaa;
+    --text-heading: #111111;
+
+    /* Borders */
+    --border-primary: rgba(0, 0, 0, 0.12);
+    --border-subtle: rgba(0, 0, 0, 0.06);
+    --border-input: #d0d0d5;
+
+    /* Accent (indigo — consistent branding) */
+    --accent: #6366f1;
+    --accent-hover: #4f46e5;
+    --accent-light: #6366f1;
+    --accent-lighter: #818cf8;
+    --accent-bg: rgba(99, 102, 241, 0.1);
+
+    /* Shadows */
+    --shadow-input: rgba(0, 0, 0, 0.04);
+    --shadow-dropdown: rgba(0, 0, 0, 0.12);
+
+    /* Status */
+    --error-bg: rgba(239, 68, 68, 0.06);
+    --error-border: rgba(239, 68, 68, 0.2);
+    --error-text: #dc2626;
+    --error-icon: #ef4444;
+    --danger-hover: #ef4444;
+
+    /* Auth page */
+    --auth-page-bg: linear-gradient(135deg, #e8eaf6 0%, #f0f0ff 50%, #e3e8f8 100%);
+    --auth-form-bg: #ffffff;
+    --auth-subtitle: #888;
+
+    /* Code blocks */
+    --code-bg: #f5f5f5;
+
+    /* Scrollbar */
+    --scrollbar-thumb: rgba(0, 0, 0, 0.15);
+    --scrollbar-track: transparent;
+}
+
+/* ═══════════════════════════════════════════════
+   Global Scrollbar Styling
+   ═══════════════════════════════════════════════ */
+
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--scrollbar-track);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--scrollbar-thumb);
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--scrollbar-thumb);
+}

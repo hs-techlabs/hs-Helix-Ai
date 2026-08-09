@@ -17,12 +17,13 @@
 }
 
 .userMessage {
-    background-color: #323232;
+    background-color: var(--bg-tertiary);
     padding: 10px 20px;
     border-radius: 14px;
     margin-left: 15rem;
     max-width: 500px;
     width: fit-content;
+    color: var(--text-primary);
 }
 
 .hljs {

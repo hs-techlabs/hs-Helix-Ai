@@ -1,19 +1,44 @@
 * {
-    color: #ececec;
+    color: var(--text-primary);
     font-family: Roboto, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 body {
     margin: 0;
     padding: 0;
+    background-color: var(--bg-primary);
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .app {
-    background-color: #212121;
+    background-color: var(--bg-primary);
     display: flex;
 }
 
 .main {
-    background-color: #212121;
+    background-color: var(--bg-primary);
     display: flex;
+}
+
+/* Auth loading screen */
+.auth-loading {
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-primary);
+}
+
+.auth-loading-spinner {
+    width: 36px;
+    height: 36px;
+    border: 3px solid var(--accent-bg);
+    border-top-color: var(--accent);
+    border-radius: 50%;
+    animation: auth-spin 0.7s linear infinite;
+}
+
+@keyframes auth-spin {
+    to { transform: rotate(360deg); }
 }
