@@ -15,6 +15,7 @@ function App() {
   const [prevChats, setPrevChats] = useState([]); //stores all chats of curr threads
   const [newChat, setNewChat] = useState(true);
   const [allThreads, setAllThreads] = useState([]);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   // passing all states and setters to context provider so that they can be accessed in any component
   const providerValues = {
     prompt, setPrompt,
@@ -22,7 +23,8 @@ function App() {
     currThreadId, setCurrThreadId,
     newChat, setNewChat,
     prevChats, setPrevChats,
-    allThreads, setAllThreads
+    allThreads, setAllThreads,
+    sidebarOpen, setSidebarOpen
   }; 
 
   // Show loading screen while checking auth

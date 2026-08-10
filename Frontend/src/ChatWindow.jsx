@@ -2,13 +2,15 @@ import "./ChatWindow.css";
 import Chat from "./Chat.jsx";
 import { MyContext } from "./MyContext.jsx";
 import { useAuth } from "./context/AuthContext.jsx";
+import { useTheme } from "./context/ThemeContext.jsx";
 import { useContext, useState, useEffect, useRef } from "react";
 import {ScaleLoader} from "react-spinners";
 import SettingsModal from "./SettingsModal.jsx";
 
 function ChatWindow() {
-    const {prompt, setPrompt, reply, setReply, currThreadId, setPrevChats, setNewChat, allThreads, setAllThreads} = useContext(MyContext);
+    const {prompt, setPrompt, reply, setReply, currThreadId, setPrevChats, setNewChat, allThreads, setAllThreads, setSidebarOpen} = useContext(MyContext);
     const { user, logout, authFetch } = useAuth();
+    const { theme, toggleTheme } = useTheme();
     const [loading, setLoading] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
     const [showSettings, setShowSettings] = useState(false);
@@ -132,7 +134,17 @@ function ChatWindow() {
     return (
         <div className="chatWindow">
             <div className="navbar">
-                <span>Helix <i className="fa-solid fa-chevron-down"></i></span>
+                <div className="navbar-left">
+                    <button 
+                        className="mobile-menu-btn" 
+                        onClick={() => setSidebarOpen(true)}
+                        aria-label="Open menu"
+                    >
+                        <i className="fa-solid fa-bars"></i>
+                    </button>
+                    <span className="brand-title">Helix <i className="fa-solid fa-chevron-down"></i></span>
+                </div>
+
                 <div className="userIconDiv" onClick={handleProfileClick} ref={userIconRef}>
                     <span className="userIcon">{userInitial}</span>
                 </div>
@@ -153,6 +165,10 @@ function ChatWindow() {
                     </div>
                     <div className="dropDownItem" onClick={handleUpgradeClick}>
                         <i className="fa-solid fa-cloud-arrow-up"></i> Upgrade plan
+                    </div>
+                    <div className="dropDownItem" onClick={toggleTheme}>
+                        <i className={`fa-solid ${theme === "dark" ? "fa-sun" : "fa-moon"}`}></i>
+                        <span>{theme === "dark" ? "Light mode" : "Dark mode"}</span>
                     </div>
                     <div className="dropDown-divider"></div>
                     <div className="dropDownItem logout-item" onClick={handleLogout}>
@@ -179,17 +195,18 @@ function ChatWindow() {
             
             <div className="chatInput">
                 <div className="inputBox">
-                    <input placeholder="Ask anything"
+                    <input 
+                        placeholder="Ask anything"
                         value={prompt}
                         onChange={(e) => setPrompt(e.target.value)}
                         onKeyDown={(e) => e.key === 'Enter'? getReply() : ''}
-                    >
-                           
-                    </input>
-                    <div id="submit" onClick={getReply}><i className="fa-solid fa-paper-plane"></i></div>
+                    />
+                    <div id="submit" onClick={getReply} role="button" aria-label="Send message">
+                        <i className="fa-solid fa-paper-plane"></i>
+                    </div>
                 </div>
                 <p className="info">
-                    Helix can make mistakes. Check important info. See Cookie Preferences.
+                    Helix can make mistakes. Check important info.
                 </p>
             </div>
         </div>

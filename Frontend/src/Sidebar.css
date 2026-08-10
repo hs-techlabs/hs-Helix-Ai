@@ -2,23 +2,41 @@
     background-color: var(--bg-secondary);
     color: var(--text-secondary);
     height: 100vh;
-    width: 320px;
+    width: 300px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    flex-shrink: 0;
 }
 
+.sidebar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
 
-button {
+.new-chat-btn {
+    flex: 1;
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin: 10px;
     padding: 10px;
-    border-radius: 5px;
+    border-radius: 8px;
     background-color: transparent;
     border: solid 0.5px var(--border-primary);
+    cursor: pointer;
+}
+
+.sidebar-close-btn {
+    display: none; /* hidden on desktop */
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 1.2rem;
+    padding: 10px;
+    margin-right: 8px;
     cursor: pointer;
 }
 
@@ -30,11 +48,11 @@ button {
     object-fit: cover;
 }
 
-button span {
+.new-chat-btn span {
     font-size: 20px;
 }
 
-button:hover {
+.new-chat-btn:hover {
     background-color: var(--bg-hover);
 }
 
@@ -48,21 +66,31 @@ button:hover {
 .history li {
     list-style-type: none;
     cursor: pointer;
-    padding: 2px 5px;
+    padding: 8px 10px;
     margin-bottom: 0.3rem;
     font-size: 14px;
-    border: solid 10px transparent;
+    border-radius: 8px;
     position: relative;
     color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+.thread-title-text {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex: 1;
 }
 
 .history li:hover {
     background-color: var(--bg-hover);
-    border-radius: 10px;
 }
 
 .sidebar-bottom {
-    padding: 0 10px 0 10px;
+    padding: 0 10px 10px 10px;
     margin: 0 10px;
     border-top: solid 0.25px var(--border-primary);
 }
@@ -111,8 +139,9 @@ button:hover {
 
 .fa-trash {
     opacity: 0;
-    position: absolute;
-    right: 0;
+    font-size: 0.9rem;
+    padding: 4px;
+    transition: opacity 0.2s;
 }
 
 .history li:hover .fa-trash {
@@ -126,5 +155,51 @@ button:hover {
 
 .highlighted {
     background-color: var(--bg-highlight);
-    border-radius: 10px;
+}
+
+/* ═══════════════════════════════════════════════
+   Mobile Responsive Sidebar (iPhone 13 Pro Max & Mobile)
+   ═══════════════════════════════════════════════ */
+
+@media (max-width: 768px) {
+    .sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        z-index: 1500;
+        width: 82%;
+        max-width: 320px;
+        transform: translateX(-100%);
+        box-shadow: 4px 0 24px rgba(0, 0, 0, 0.4);
+    }
+
+    .sidebar.sidebar-mobile-open {
+        transform: translateX(0);
+    }
+
+    .sidebar-close-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .sidebar-backdrop {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.6);
+        backdrop-filter: blur(3px);
+        z-index: 1400;
+        animation: backdropFade 0.25s ease;
+    }
+
+    @keyframes backdropFade {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    /* Make trash icon touch visible on mobile */
+    .history li .fa-trash {
+        opacity: 0.7;
+    }
 }
