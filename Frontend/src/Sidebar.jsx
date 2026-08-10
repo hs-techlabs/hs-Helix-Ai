@@ -107,7 +107,9 @@ function Sidebar() {
                     <span>{theme === "dark" ? "Light mode" : "Dark mode"}</span>
                 </div>
                 <div className="sign">
-                    <p>By hs-techlab <i className="fa-brands fa-github-alt"></i> </p>
+                    <a href="https://github.com/hs-techlabs" target="_blank" rel="noopener noreferrer" className="github-link">
+                        By hs-techlab <i className="fa-brands fa-github-alt"></i>
+                    </a>
                 </div>
             </div>
         </section>

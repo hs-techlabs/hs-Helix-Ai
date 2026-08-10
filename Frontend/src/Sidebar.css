@@ -105,8 +105,23 @@ button:hover {
     text-align: center;
 }
 
-.sign p {
+.github-link {
     color: var(--text-tertiary);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    transition: color 0.2s ease;
+}
+
+.github-link:hover {
+    color: var(--text-primary);
+    text-decoration: underline;
+}
+
+.github-link i {
+    font-size: 1rem;
 }
 
 .fa-trash {
