@@ -7,7 +7,7 @@
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 1.2rem;
 }
 
 .userDiv {
@@ -20,12 +20,79 @@
 .gptDiv {
     text-align: left;
     font-size: 0.95rem;
-    line-height: 1.6;
+    line-height: 1.65;
     width: 100%;
     max-width: 100%;
     overflow-x: auto;
+    word-break: break-word;
+    color: var(--text-primary);
 }
 
+/* Multi-line paragraph formatting */
+.gptDiv p {
+    margin-top: 0.4rem;
+    margin-bottom: 0.8rem;
+    white-space: pre-wrap; /* Preserves newlines and linebreaks */
+}
+
+.gptDiv p:last-child {
+    margin-bottom: 0;
+}
+
+/* Heading formatting */
+.gptDiv h1, .gptDiv h2, .gptDiv h3, .gptDiv h4 {
+    color: var(--text-heading);
+    margin-top: 1.2rem;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    line-height: 1.3;
+}
+
+.gptDiv h1 { font-size: 1.4rem; }
+.gptDiv h2 { font-size: 1.2rem; }
+.gptDiv h3 { font-size: 1.05rem; }
+
+/* Lists formatting */
+.gptDiv ul, .gptDiv ol {
+    margin: 0.5rem 0 0.8rem 1.5rem;
+    padding-left: 0.5rem;
+}
+
+.gptDiv li {
+    margin-bottom: 0.35rem;
+    line-height: 1.6;
+}
+
+/* Blockquote formatting */
+.gptDiv blockquote {
+    border-left: 3px solid var(--accent);
+    margin: 0.8rem 0;
+    padding: 0.4rem 1rem;
+    color: var(--text-secondary);
+    background-color: var(--bg-highlight);
+    border-radius: 0 8px 8px 0;
+}
+
+/* Tables formatting */
+.gptDiv table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+    font-size: 0.9rem;
+}
+
+.gptDiv th, .gptDiv td {
+    border: 1px solid var(--border-subtle);
+    padding: 0.55rem 0.8rem;
+    text-align: left;
+}
+
+.gptDiv th {
+    background-color: var(--bg-tertiary);
+    font-weight: 600;
+}
+
+/* User Message formatting */
 .userMessage {
     background-color: var(--bg-tertiary);
     padding: 12px 18px;
@@ -35,7 +102,9 @@
     width: fit-content;
     color: var(--text-primary);
     word-break: break-word;
+    white-space: pre-wrap; /* Preserves user's multi-line text input */
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    line-height: 1.5;
 }
 
 .hljs {
@@ -46,7 +115,7 @@
 pre {
     white-space: pre-wrap;
     word-break: break-word;
-    margin: 0.5rem 0;
+    margin: 0.8rem 0;
 }
 
 /* ═══════════════════════════════════════════════
@@ -66,5 +135,10 @@ pre {
 
     .gptDiv {
         font-size: 0.9rem;
+    }
+
+    .gptDiv table {
+        display: block;
+        overflow-x: auto;
     }
 }

@@ -15,6 +15,8 @@
     "react-markdown": "^9.0.1",
     "react-spinners": "^0.13.8",
     "rehype-highlight": "^7.0.0",
+    "remark-breaks": "^4.0.0",
+    "remark-gfm": "^4.0.1",
     "uuid": "^9.0.1"
   },
   "devDependencies": {
