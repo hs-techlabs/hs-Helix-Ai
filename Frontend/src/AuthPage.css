@@ -196,7 +196,7 @@
     border: 1px solid var(--border-input);
     border-radius: 10px;
     color: var(--text-heading);
-    font-size: 16px; /* 16px prevents iOS Safari auto-zoom on focus */
+    font-size: 0.85rem;
     transition: border-color 0.2s, box-shadow 0.2s, background-color 0.3s;
     outline: none;
     box-shadow: none;

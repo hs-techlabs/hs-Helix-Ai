@@ -7,7 +7,7 @@ import {v1 as uuidv1} from "uuid";
 import blackLogo from "./assets/blacklogo.png";
 
 function Sidebar() {
-    const {allThreads, setAllThreads, currThreadId, setNewChat, setPrompt, setReply, setCurrThreadId, setPrevChats, sidebarOpen, setSidebarOpen} = useContext(MyContext);
+    const {allThreads, setAllThreads, currThreadId, setNewChat, setPrompt, setReply, setCurrThreadId, setPrevChats} = useContext(MyContext);
     const { authFetch } = useAuth();
     const { theme, toggleTheme } = useTheme();
     const API_BASE = import.meta.env.VITE_API_BASE_URL || "http://127.0.0.1:8080";
@@ -38,12 +38,10 @@ function Sidebar() {
         setReply(null);
         setCurrThreadId(uuidv1());
         setPrevChats([]);
-        setSidebarOpen(false); // Close sidebar on mobile
     }
 
     const changeThread = async (newThreadId) => {
         setCurrThreadId(newThreadId);
-        setSidebarOpen(false); // Close sidebar on mobile
 
         try {
             const response = await authFetch(`${API_BASE}/api/thread/${newThreadId}`);
@@ -76,63 +74,43 @@ function Sidebar() {
     }
 
     return (
-        <>
-            {/* Mobile backdrop */}
-            {sidebarOpen && (
-                <div 
-                    className="sidebar-backdrop" 
-                    onClick={() => setSidebarOpen(false)}
-                ></div>
-            )}
+        <section className="sidebar">
+            {/* New Chat button */}
+            <button onClick={createNewChat}>
+                <img src={blackLogo} alt="gpt logo" className="logo"></img>
+                <span><i className="fa-solid fa-pen-to-square"></i></span>
+            </button>
 
-            <section className={`sidebar ${sidebarOpen ? "sidebar-mobile-open" : ""}`}>
-                {/* Header with logo, New Chat, and Mobile Close button */}
-                <div className="sidebar-header">
-                    <button onClick={createNewChat} className="new-chat-btn">
-                        <img src={blackLogo} alt="gpt logo" className="logo"></img>
-                        <span><i className="fa-solid fa-pen-to-square"></i></span>
-                    </button>
-
-                    <button 
-                        className="sidebar-close-btn" 
-                        onClick={() => setSidebarOpen(false)}
-                        aria-label="Close menu"
-                    >
-                        <i className="fa-solid fa-xmark"></i>
-                    </button>
+            {/* Thread history */}
+            <ul className="history">
+                {
+                    allThreads?.map((thread, idx) => (
+                        <li key={idx} 
+                            onClick={(e) => changeThread(thread.threadId)}
+                            className={thread.threadId === currThreadId ? "highlighted": " "}
+                        >
+                            {thread.title}
+                            <i className="fa-solid fa-trash"
+                                onClick={(e) => {
+                                    e.stopPropagation(); //stop event bubbling
+                                    deleteThread(thread.threadId);
+                                }}
+                            ></i>
+                        </li>
+                    ))
+                }
+            </ul>
+ 
+            <div className="sidebar-bottom">
+                <div className="theme-toggle-btn" onClick={toggleTheme}>
+                    <i className={`fa-solid ${theme === "dark" ? "fa-sun" : "fa-moon"}`}></i>
+                    <span>{theme === "dark" ? "Light mode" : "Dark mode"}</span>
                 </div>
-
-                {/* Thread history */}
-                <ul className="history">
-                    {
-                        allThreads?.map((thread, idx) => (
-                            <li key={idx} 
-                                onClick={(e) => changeThread(thread.threadId)}
-                                className={thread.threadId === currThreadId ? "highlighted": " "}
-                            >
-                                <span className="thread-title-text">{thread.title}</span>
-                                <i className="fa-solid fa-trash"
-                                    onClick={(e) => {
-                                        e.stopPropagation(); //stop event bubbling
-                                        deleteThread(thread.threadId);
-                                    }}
-                                ></i>
-                            </li>
-                        ))
-                    }
-                </ul>
-     
-                <div className="sidebar-bottom">
-                    <div className="theme-toggle-btn" onClick={toggleTheme}>
-                        <i className={`fa-solid ${theme === "dark" ? "fa-sun" : "fa-moon"}`}></i>
-                        <span>{theme === "dark" ? "Light mode" : "Dark mode"}</span>
-                    </div>
-                    <div className="sign">
-                        <p>By hs-techlab <i className="fa-brands fa-github-alt"></i> </p>
-                    </div>
+                <div className="sign">
+                    <p>By hs-techlab <i className="fa-brands fa-github-alt"></i> </p>
                 </div>
-            </section>
-        </>
+            </div>
+        </section>
     )
 }
 
