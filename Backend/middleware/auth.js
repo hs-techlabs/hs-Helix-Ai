@@ -11,9 +11,10 @@ const authMiddleware = async (req, res, next) => {
         }
 
         const token = authHeader.split(" ")[1];
+        const JWT_SECRET = process.env.JWT_SECRET || "helix_jwt_secret_key_default_2026";
 
         // Verify token
-        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        const decoded = jwt.verify(token, JWT_SECRET);
 
         // Find user by ID from token payload (exclude password)
         const user = await User.findById(decoded.userId);

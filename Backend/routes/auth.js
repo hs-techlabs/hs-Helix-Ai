@@ -5,9 +5,11 @@ import authMiddleware from "../middleware/auth.js";
 
 const router = express.Router();
 
+const JWT_SECRET = process.env.JWT_SECRET || "helix_jwt_secret_key_default_2026";
+
 // Helper: generate JWT token
 const generateToken = (userId) => {
-    return jwt.sign({ userId }, process.env.JWT_SECRET, { expiresIn: "7d" });
+    return jwt.sign({ userId }, JWT_SECRET, { expiresIn: "7d" });
 };
 
 // POST /api/auth/register
